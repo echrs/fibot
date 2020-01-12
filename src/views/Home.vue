@@ -1,24 +1,20 @@
 <template>
-  <div class="home">
-  <div class="row">
-    <div class="col-6">
-      1 of 2
-    </div>
-    <div class="col-6" style="background-color: #EFFAFE">
-      2 of 2
-    </div>
-  </div>
-  </div>
+  <v-layout fill-height>
+    <Info />
+    <Chatbot />
+  </v-layout>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Chatbot from '@/components/Chatbot.vue'
+import Info from '@/components/Info.vue'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    Info,
+    Chatbot
   }
 }
 </script>
