@@ -34,11 +34,6 @@
         <v-container fluid align-items="stretch"></v-container>
       </router-view>
     </v-content>
-
-    <v-footer color="#A0E0F6" app>
-      <v-spacer />
-      <span class="white--text">&copy; 2019</span>
-    </v-footer>
     
   </v-app>
 </template>
