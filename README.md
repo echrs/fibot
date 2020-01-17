@@ -3,7 +3,7 @@ Web aplikacija je namijenjena studentima Fakulteta Informatike u Puli. Kao što 
 
 Funkcionalnosti bi bile informiranje potencijalnih studenata o cijenama, zahtjevima, smještaju, podrška trenutnim studentima, informacije o aktivnostima na fakultetu, pomoć pri upisima...
 
-Članovi tima: Nikki Bernobić
+Članovi tima: Nikki Bernobić  
 Korištene tehnologije: Vue + Vuetify framework, Firebase, Python
 ## Project setup
 ```
