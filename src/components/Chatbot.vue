@@ -1,14 +1,25 @@
 <template>
-  <v-flex md6>
-    <v-card color="#EFFAFE" flat height="100%">
+<v-container fill-height>
+  <v-layout style="background:#EFFAFE" justify-center align-center>
+        <v-card color="#EFFAFE" flat height="100%">
       <v-card-text class="text-center">
       </v-card-text>
     </v-card>
-  </v-flex>
+  </v-layout>
+  </v-container>
 </template>
 
 <script>
-  export default {
-    name: 'Chatbot',
+import UserMessage from "@/components/UserMessage.vue";
+import BotMessage from "@/components/BotMessage.vue";
+import Input from "@/components/Input.vue";
+
+export default {
+  name: "Chatbot",
+  components: {
+    UserMessage,
+    BotMessage,
+    Input
   }
+};
 </script>

@@ -31,7 +31,6 @@
 
     <v-content>
       <router-view>
-        <v-container fluid align-items="stretch"></v-container>
       </router-view>
     </v-content>
     
