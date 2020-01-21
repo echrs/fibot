@@ -7,10 +7,11 @@
           justify="center"
           class="pa-12 mt-12 mb-12"
           width="700"
-          height="700"
+          height="550"
           normal
         >
-          <v-form ref="form">
+        <h6 class="headline font-weight-bold mb-12"> REGISTER@FIBOT </h6>
+          <v-form style="width:450px" ref="form">
             <v-text-field
               v-model="imekorisnika"
               :rules="nameRules"
@@ -29,12 +30,13 @@
             ></v-text-field>
             <v-text-field
               v-model="passwordConfirmation"
+              :rules="passwordRules"
               type="password"
               label="Ponovite lozinku"
               required
             ></v-text-field>
-            <div v-if="password != passwordConfirmation" class="alert alert-danger">Lozinke se ne podudaraju.</div>
-            <v-btn v-if="password === passwordConfirmation" color="blue lighten" class="mr-4" @click="signup">Registriraj se</v-btn>
+            <v-alert v-if="password != passwordConfirmation" type="error">Lozinke se ne podudaraju.</v-alert>
+            <v-btn depressed v-if="password === passwordConfirmation" color="#a0e1f6" dark class="mt-12" @click="signup">Nastavi</v-btn>
           </v-form>
         </v-sheet>
       </v-col>
@@ -43,27 +45,11 @@
 </template>
 
 <script>
+import store from "@/store.js";
 export default {
   name: "signup",
   data() {
-    return {
-      imekorisnika: "",
-      nameRules: [
-        v => !!v || "Potrebno je unijeti ime",
-        v => (v && v.length <= 10) || "Ime mora imati manje od 10 znakova"
-      ],
-      email: "",
-      password: "",
-      passwordConfirmation: "",
-      passwordRules: [
-        v => !!v || "Potrebno je unijeti lozinku",
-        v => (v && v.length >= 8) || "Lozinka mora imati više od 8 znakova"
-      ],
-      emailRules: [
-        v => !!v || "Potrebno je unijeti e-mail",
-        v => /.+@.+\..+/.test(v) || "E-mail treba biti validan"
-      ]
-    };
+    return store;
   },
   methods: {
     signup() {

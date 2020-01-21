@@ -1,4 +1,4 @@
-<template><v-app>
+<template>
   <v-container fill-height fluid class="p-0">
     <v-row class="p-0">
       <v-col cols="6" class="p-0">
@@ -8,7 +8,7 @@
         <Chatbot />
       </v-col>
     </v-row>
-  </v-container></v-app>
+  </v-container>
 </template>
 
 <script>

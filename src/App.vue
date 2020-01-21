@@ -7,13 +7,47 @@
             <v-icon color="white">home</v-icon>
           </router-link>
         </v-btn>
+        <!-- menu 1 -->
+        <v-menu v-if="!authenticated" :close-on-click="true" :offset-y="true">
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" icon>
+              <v-icon color="white">person</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item-title>
+              <router-link to="/signup">
+                <v-btn text small>Registracija</v-btn>
+              </router-link>
+            </v-list-item-title>
+            <v-list-item-title>
+              <router-link to="/login">
+                <v-btn class="pr-12" text small>Prijava</v-btn>
+              </router-link>
+            </v-list-item-title>
+          </v-list>
+        </v-menu>
+        <!-- menu 2 -->
+        <v-menu v-if="authenticated" :close-on-click="true" :offset-y="true">
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on" icon>
+              <v-icon color="white">person</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item-title>
+              <router-link to="/profil">
+                <v-btn class="pr-5" text small>Moj profil</v-btn>
+              </router-link>
+            </v-list-item-title>
+            <v-list-item-title>
+              <v-btn class="pr-12" @click="logout" text small>Odjava</v-btn>
+            </v-list-item-title>
+          </v-list>
+        </v-menu>
+        <!-- dr iconi -->
         <v-btn icon>
-          <router-link to="/signup">
-            <v-icon color="white">person</v-icon>
-          </router-link>
-        </v-btn>
-        <v-btn icon>
-          <router-link to="/">
+          <router-link to="/contact">
             <v-icon color="white">mail</v-icon>
           </router-link>
         </v-btn>

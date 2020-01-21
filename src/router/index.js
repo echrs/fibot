@@ -33,6 +33,14 @@ const routes = [
     // this generates a separate chunk (login.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "signup" */ '../views/Profil.vue')
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    // route level code-
+    // this generates a separate chunk (login.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "signup" */ '../views/Contact.vue')
   }
 ]
 
