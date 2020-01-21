@@ -10,14 +10,9 @@
           height="550"
           normal
         >
-        <h6 class="headline font-weight-bold mb-12"> REGISTER@FIBOT </h6>
+          <h6 class="headline font-weight-bold mb-12">REGISTER@FIBOT</h6>
           <v-form style="width:450px" ref="form">
-            <v-text-field
-              v-model="imekorisnika"
-              :rules="nameRules"
-              label="Ime"
-              required
-            ></v-text-field>
+            <v-text-field v-model="imekorisnika" :rules="nameRules" label="Ime" required></v-text-field>
 
             <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
 
@@ -32,11 +27,18 @@
               v-model="passwordConfirmation"
               :rules="passwordRules"
               type="password"
-              label="Ponovite lozinku"
+              label="Ponovno upišite lozinku"
               required
             ></v-text-field>
             <v-alert v-if="password != passwordConfirmation" type="error">Lozinke se ne podudaraju.</v-alert>
-            <v-btn depressed v-if="password === passwordConfirmation" color="#a0e1f6" dark class="mt-12" @click="signup">Nastavi</v-btn>
+            <v-btn
+              depressed
+              v-if="password === passwordConfirmation"
+              color="#a0e1f6"
+              dark
+              class="mt-12"
+              @click="signup"
+            >Nastavi</v-btn>
           </v-form>
         </v-sheet>
       </v-col>
@@ -45,11 +47,21 @@
 </template>
 
 <script>
-import store from "@/store.js";
 export default {
   name: "signup",
   data() {
-    return store;
+    return {
+      imekorisnika: '',
+      nameRules: [
+        v => !!v || "Potrebno je unijeti ime",
+        v => (v && v.length <= 10) || "Ime mora imati manje od 10 znakova"
+      ],
+      email: "",
+      emailRules: [v => !!v || "Potrebno je unijeti e-mail", v => /.+@.+\..+/.test(v) || 'E-mail treba biti važeći',],
+      password: "",
+      passwordConfirmation: "",
+      passwordRules: [v => !!v || "Potrebno je unijeti lozinku", v => (v && v.length >= 8) || "Lozinka mora imati više od 8 znakova"]
+    };
   },
   methods: {
     signup() {

@@ -10,7 +10,7 @@
           height="400"
           normal
         >
-        <h6 class="headline font-weight-bold mb-12"> LOGIN@FIBOT </h6>
+          <h6 class="headline font-weight-bold mb-12">LOGIN@FIBOT</h6>
           <v-form style="width:450px" ref="form">
             <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
 
@@ -30,17 +30,24 @@
 </template>
 
 <script>
-import store from "@/store.js";
 export default {
   name: "login",
   data() {
-    return store;
+    return {
+      email: "",
+      emailRules: [v => !!v || "Potrebno je unijeti e-mail"],
+      password: "", 
+      passwordRules: [v => !!v || "Potrebno je unijeti lozinku"]
+    };
   },
   methods: {
     login() {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(function(error) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .catch(function(error) {
           console.log(error);
-      });
+        });
     }
   }
 };
