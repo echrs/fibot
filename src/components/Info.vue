@@ -6,7 +6,7 @@
           <v-img class="white--text align-end" width="250px" height="250px" src="/images/fibot.png"></v-img>
           <v-card-title class="justify-center">Hej! Moje ime je Fi. A tvoje?</v-card-title>
           <v-card-text class="justify-center">
-            <v-text-field style="width:150px" v-model="imekorisnika"></v-text-field>
+            <v-text-field outlined dense rounded style="width:150px" v-model="imekorisnika"></v-text-field>
           </v-card-text>
            <v-card-text v-if="!authenticated" class="pt-0 justify-center">
           <router-link to="/login"><v-btn class="mr-3" depressed color="#a0e1f6" dark>Prijava</v-btn></router-link>

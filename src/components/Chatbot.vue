@@ -1,39 +1,55 @@
 <template>
-  <v-container class="container" fill-height style="background:#EFFAFE">
-    <v-row style="background:#EFFAFE" justify="center" align="center">
+  <v-container class="container scroll-y" fill-height style="background:#EFFAFE" align-end>
+    <v-row style="background:#EFFAFE; max-height 400px; overflow-y: auto;">
       <v-col>
-        <v-card color="#EFFAFE" flat height="100%">
-          <v-card-text>
-            <UserMessage />
-            <BotMessage />
-          </v-card-text>
-        </v-card>
+        <div class="pb-1" v-for="(message,key) in messages" :key="key">
+          <v-chip v-bind:id="message.text" :imekorisnika="message.imekorisnika">{{message.text}}</v-chip>
+        </div>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-text-field
+          label="Reci mi!"
+          rounded
+          outlined
+          v-model="newMessage"
+          v-on:keyup.enter="send()"
+        ></v-text-field>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import BotMessage from "@/components/BotMessage.vue";
-import UserMessage from "@/components/UserMessage.vue";
-import Input from "@/components/Input.vue";
-
+import store from "@/store.js";
 export default {
   name: "Chatbot",
-  components: {
-    BotMessage,
-    UserMessage,
-    Input
-  },
+  components: {},
   data() {
-    return {};
+    return store;
+  },
+  methods: {
+    send() {
+      console.log("sending " + this.newMessage);
+      this.messages.push({
+        imekorisnika: this.imekorisnika,
+        text: this.newMessage
+      }),
+      db.collection("usermessages").add({
+        imekorisnika: this.imekorisnika,
+        newMessage: this.newMessage
+      });
+              (this.newMessage = "");
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .container {
-  height: calc(100vh - 64px) !important;
+  max-height: calc(100vh - 64px) !important;
+  overflow-y: auto;
 }
 </style>
 

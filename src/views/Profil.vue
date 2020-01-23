@@ -7,7 +7,7 @@
           justify="center"
           class="pa-12 mt-12 mb-12"
           width="700"
-          height="500"
+          height="470"
           normal
         >
           <h6 class="headline font-weight-bold mb-12">ACCOUNT@FIBOT</h6>
