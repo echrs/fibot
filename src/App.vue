@@ -92,15 +92,22 @@ export default {
         console.log("Korisnik je prijavljen kao " + user.email);
         this.authenticated = true;
         this.userEmail = user.email;
+        db.collection("users")
+          .doc(user.email)
+          .get()
+          .then(doc => {
+            if (doc.exists) {
+              this.imeKorisnika = doc.data().imeKorisnika;
+            } else {
+              console.log("No such document!");
+            }
+          });
         if (this.$route.name !== "home") {
           this.$router.push({ name: "home" });
         }
       } else {
         console.log("Korisnik nije prijavljen.");
         this.authenticated = false;
-        if (this.$route.name !== "login") {
-          this.$router.push({ name: "login" });
-        }
       }
     });
   }

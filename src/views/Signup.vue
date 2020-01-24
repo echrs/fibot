@@ -12,7 +12,7 @@
         >
           <h6 class="headline font-weight-bold mb-12">REGISTER@FIBOT</h6>
           <v-form style="width:450px" ref="form">
-            <v-text-field v-model="imekorisnika" :rules="nameRules" label="Ime" required></v-text-field>
+            <v-text-field v-model="imeKorisnika" :rules="nameRules" label="Ime" required></v-text-field>
 
             <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
 
@@ -51,16 +51,22 @@ export default {
   name: "signup",
   data() {
     return {
-      imekorisnika: '',
+      imeKorisnika: "",
       nameRules: [
         v => !!v || "Potrebno je unijeti ime",
         v => (v && v.length <= 10) || "Ime mora imati manje od 10 znakova"
       ],
       email: "",
-      emailRules: [v => !!v || "Potrebno je unijeti e-mail", v => /.+@.+\..+/.test(v) || 'E-mail treba biti važeći',],
+      emailRules: [
+        v => !!v || "Potrebno je unijeti e-mail",
+        v => /.+@.+\..+/.test(v) || "E-mail treba biti važeći"
+      ],
       password: "",
       passwordConfirmation: "",
-      passwordRules: [v => !!v || "Potrebno je unijeti lozinku", v => (v && v.length >= 8) || "Lozinka mora imati više od 8 znakova"]
+      passwordRules: [
+        v => !!v || "Potrebno je unijeti lozinku",
+        v => (v && v.length >= 8) || "Lozinka mora imati više od 8 znakova"
+      ]
     };
   },
   methods: {
@@ -68,7 +74,25 @@ export default {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
-        .catch(function(error) {});
+        .then(() => {
+          // postavi podatke o korisniku
+          let id = this.email;
+          // sada moramo spremiti te dodatne podatke
+          db.collection("users")
+            .doc(id)
+            .set({
+              imeKorisnika: this.imeKorisnika
+            });
+          then(function() {
+            console.log("Document successfully written!");
+          }).catch(function(error) {
+            console.error("Error writing document: ", error);
+          });
+        })
+        .catch(error => {
+          console.error(error);
+          this.errorMessage = error.message;
+        });
     }
   }
 };

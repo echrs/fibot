@@ -1,5 +1,5 @@
 export default {
-    imekorisnika: '',
+    imeKorisnika: '',
     authenticated: false,
     userEmail: 'test@test.com',
     newMessage: "",

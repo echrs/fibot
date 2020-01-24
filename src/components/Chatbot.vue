@@ -33,14 +33,14 @@ export default {
     send() {
       console.log("sending " + this.newMessage);
       this.messages.push({
-        imekorisnika: this.imekorisnika,
+        imeKorisnika: this.imeKorisnika,
         text: this.newMessage
       }),
       db.collection("usermessages").add({
-        imekorisnika: this.imekorisnika,
+        imeKorisnika: this.imeKorisnika,
         newMessage: this.newMessage
       });
-              (this.newMessage = "");
+      this.newMessage = ""
     }
   }
 };
