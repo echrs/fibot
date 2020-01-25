@@ -3,5 +3,6 @@ export default {
     authenticated: false,
     userEmail: 'test@test.com',
     newMessage: "",
-    messages: []
+    messages: [],
+    disableInput: false,
 }

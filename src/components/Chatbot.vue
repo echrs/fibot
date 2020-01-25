@@ -13,8 +13,9 @@
           label="Reci mi!"
           rounded
           outlined
+          :disabled="disableInput"
           v-model="newMessage"
-          v-on:keyup.enter="send()"
+          v-on:keyup.enter="sendMessage()"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -30,7 +31,7 @@ export default {
     return store;
   },
   methods: {
-    send() {
+    sendMessage() {
       console.log("sending " + this.newMessage);
       this.messages.push({
         imeKorisnika: this.imeKorisnika,
@@ -41,6 +42,16 @@ export default {
         newMessage: this.newMessage
       });
       this.newMessage = ""
+
+      this.receiveResponse()
+    },
+    receiveResponse() {
+      //this.disableInput = true,
+            this.messages.push({
+        imeKorisnika: "bot",
+        text: "A reply!"
+      })
+      //this.disableInput = false
     }
   }
 };

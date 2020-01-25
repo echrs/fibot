@@ -11,9 +11,15 @@
           normal
         >
           <h6 class="headline font-weight-bold mb-12">CONTACT US</h6>
-          <v-textarea rows="5" row-height="50" outlined auto-grow label="Fibot mi je rekao..."></v-textarea>
+          <v-textarea
+            v-model="feedback"
+            rows="5"
+            row-height="50"
+            outlined
+            auto-grow
+            label="Fibot mi je rekao..."
+          ></v-textarea>
           <v-btn depressed color="#a0e1f6" dark @click="send">Pošalji</v-btn>
-          <!--uspjesno poslano alert + js funkcija ...-->
         </v-sheet>
       </v-col>
     </v-row>
@@ -23,9 +29,18 @@
 <script>
 export default {
   name: "contact",
+  data() {
+    return {
+      feedback: ""
+    };
+  },
   methods: {
     send() {
-      console.log("Not sent yet...");
+      console.log("Feedback/Q sent: " + this.feedback);
+      db.collection("feedback").add({
+        feedback: this.feedback
+      });
+      this.feedback = "";
     }
   }
 };
