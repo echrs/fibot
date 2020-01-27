@@ -14,6 +14,9 @@
               caret-animation="blink"
             ></vue-typer>
           </v-card-title>
+          <v-card-text class="justify-center">
+            <v-text-field dense style="width:150px" v-model="imeKorisnika"></v-text-field>
+          </v-card-text>
           <v-card-text v-if="!authenticated" class="pt-0 justify-center">
             <router-link to="/login">
               <v-btn class="mr-3" depressed color="#a0e1f6" dark>Prijava</v-btn>
@@ -39,8 +42,6 @@ export default {
   },
   components: {
     VueTyper
-  },
-  methods:{
   }
 };
 </script>

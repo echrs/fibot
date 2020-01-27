@@ -1,13 +1,17 @@
 <template>
   <v-container class="container scroll-y" fill-height style="background:#EFFAFE" align-end>
     <v-row style="background:#EFFAFE; max-height 400px; overflow-y: auto;">
-      <v-col id="msgs" style="visibility:hidden;">
-        <div class="pb-1">
-          <v-chip>{{initialMessage}}</v-chip>
-        </div>
-        <div class="pb-1">
-          <v-chip>nloop</v-chip>
-        </div>
+      <v-col id="msgs" style="visibility:visible;">
+        <transition :duration="2000" name="list">
+          <div class="pb-1" v-if="imeKorisnika">
+            <v-chip>Zdravo {{imeKorisnika}}! O čemu želiš razgovarati?</v-chip>
+          </div>
+        </transition>
+                <transition :duration="2000" name="list">
+          <div class="pb-1" v-if="imeKorisnika">
+            <v-btn>{{this.razgovor.Pocetak.constructor.name}}</v-btn>
+          </div>
+        </transition>
         <transition-group name="list">
           <div class="pb-1" v-for="(message,key) in messages" :key="key">
             <v-chip v-bind:id="message.text" :imeKorisnika="message.imeKorisnika">{{message.text}}</v-chip>
@@ -39,18 +43,6 @@ export default {
     return store;
   },
   mounted() {
-    let self = this;
-    setTimeout(function() {
-      if (self.imeKorisnika != "") {
-        self.initialMessage =
-          "Zdravo " + self.imeKorisnika + "! O čemu želiš razgovarati?";
-      } else {
-        self.initialMessage = "Zdravo! O čemu želiš razgovarati?";
-      }
-    }, 5000);
-    setTimeout(function() {
-      document.getElementById("msgs").style.visibility = "visible";
-    }, 1000);
   },
   methods: {
     sendMessage() {
@@ -87,7 +79,8 @@ export default {
 .list-item {
   margin-right: 10px;
 }
-.list-enter-active, .list-leave-active {
+.list-enter-active,
+.list-leave-active {
   transition: all 1s;
 }
 .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
