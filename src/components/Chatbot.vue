@@ -5,11 +5,12 @@
         <transition :duration="2000" name="list">
           <div class="pb-1" v-if="imeKorisnika">
             <v-chip>Zdravo {{imeKorisnika}}! O čemu želiš razgovarati?</v-chip>
-          </div>
-        </transition>
-                <transition :duration="2000" name="list">
-          <div class="pb-1" v-if="imeKorisnika">
-            <v-btn>{{this.razgovor.Pocetak.constructor.name}}</v-btn>
+            <div class="pb-1" v-for="(message, name) in razgovor" :key="name">
+              <div class="pb-1">
+                <v-btn @click="sendMessage(name)">{{name}}</v-btn>
+              </div>
+              </div>
+            </div>
           </div>
         </transition>
         <transition-group name="list">
@@ -42,10 +43,10 @@ export default {
   data() {
     return store;
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
-    sendMessage() {
+    sendMessage(value) {
+      this.newMessage = value;
       console.log("sending " + this.newMessage);
       this.messages.push({
         imeKorisnika: this.imeKorisnika,

@@ -8,33 +8,55 @@ export default {
     disableInput: false,
     razgovor: {
         Pocetak: {
-            bot_kaze: ['hahaha', 'hahaha'],
-            user_odgovori: [{
+            show: false,
+            bot_kaze: ['Pozdrav, o čemu zelis pricati.', '...'],
+            user_odgovori: [
+            {
                 izbor: "Upisi",
-                value: "Stud_"
-            }]
+                value: "upisi",
+            },
+            {
+                izbor: "Studijski programi",
+                value: "studijski_programi",
+            },
+            {
+                izbor: "Studentska pitanja",
+                value: "studentska_pitanja",
+            },
+            {
+                izbor: "Općenito o faksu",
+                value: "fakultet",
+            },
+        ]
         },
         Kraj: {
-            bot_kaze: ['hahaha', 'hahaha'],
+            show: false,
+            bot_kaze: ['Ovo je kraj.', 'hahaha'],
             user_odgovori: [{
-                izbor: "Upisi",
-                value: "Stud_"
+                izbor: "Opet!",
+                value: "Pocetak",
             }]
         },
         Upisi: {
-            bot_kaze: ['hahaha', 'hahaha'],
+            show: false,
+            bot_kaze: ['Sto tocno zelis o upisima?', 'jos jedna recenica.'],
             user_odgovori: [{
-                izbor: "Upisi",
-                value: "Stud_"
-            }]
+                izbor: "Vrijeme",
+                value: "vrijeme",
+            },
+            {
+                izbor: "Mjesto",
+                value: "mjesto",
+            },
+            {
+                izbor: "Dokumentacija",
+                value: "dokumentacija",
+            },
+            {
+                izbor: "Kraj je tu.",
+                value: "Kraj",
+            },
+        ]
         },
-        Stud_programi: {
-            bot_kaze: ['hahaha', 'hahaha'],
-            user_odgovori: [{
-                izbor: "Upisi",
-                value: "Stud_"
-            }]
-        },
-
     }
 }
