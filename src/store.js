@@ -27,10 +27,10 @@ export default {
     },
     arrayrec: [
         'Fakultet informatike u Puli službeno je oformljen 2018. godine, dok je studij informatike otvoren još u 2011. godini, u sklopu FET-a!', 
-        'Udruga SPIN nudi besplatno korištenje resursa fakulteta i stručno mentorstvo u projektima svih područja ICT-a.', 
+        'Fakultetska udruga SPIN nudi besplatno korištenje resursa fakulteta i stručno mentorstvo u projektima svih područja ICT-a.', 
         'Na fakultetu koriste se napredne tehnologije kao što su Tensorflow, Flask, Django, SQLAlchemy, Postgres, Vue.js...',
-        'Možeš sudjelovati na uzbudljivim natjecanjima kao što su ACM ICPC, STEM Games, Global Game Jam.',
-        'Znaš li da fakultet ima kolegij Stručna praksa gdje studenti imaju na izbor više od 20 poslodavaca? Sada znaš!',
+        'Uz FIPU Možeš sudjelovati na uzbudljivim natjecanjima kao što su ACM ICPC, STEM Games, Global Game Jam.',
+        'Znaš li da fakultet ima kolegij Stručna praksa gdje studenti imaju na izbor više od 20 poslodavaca?',
     ],
     recenicaIndex:'',
     recenicaString:'',
