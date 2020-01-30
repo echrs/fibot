@@ -80,8 +80,8 @@ export default {
             .doc(id)
             .set({
               imeKorisnika: this.imeKorisnika
-            });
-          then(function() {
+            })
+          .then(function() {
             console.log("Uspješno kreiran korisnik!");
           }).catch(function(error) {
             console.error("Error: ", error);
