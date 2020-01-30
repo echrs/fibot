@@ -12,12 +12,31 @@
           <Talquei>
             <TalqueiMessage :imeKorisnika="imeKorisnika" :text="initialMessage" />
             <TalqueiMessage v-model="value" :input="{ tag: 'select', options: teme }" is-user />
-            <TalqueiMessage v-if="this.answer === teme.upisi"
-              text="Trenutno nema upisa u tijeku! Upisi za Fakultet Informatike u Puli odvijaju se u rujnu. "
+            <TalqueiMessage
+              v-show="this.value === teme.upisi"
+              text="Trenutno nema upisa u tijeku! Upisi za Fakultet informatike u Puli odvijaju se krajem srpnja i rujna. "
             />
-            <TalqueiMessage v-if="this.answer === teme.stud_programi"
+            <TalqueiMessage
+              v-show="this.value === teme.stud_programi"
               text="FIPU nudi preddiplomske i diplomske studije. Koji te zanimaju?"
             />
+            <TalqueiMessage
+              v-if="this.value === teme.stud_programi"
+              v-model="grana1"
+              :input="{ tag: 'select', options: studiji }"
+              is-user
+            />
+            <TalqueiMessage
+              v-show="this.value === teme.stud_pitanja"
+              text="Ah! Pitanja - svi ih imamo... Reci mi!"
+            />
+            <TalqueiMessage
+              v-if="this.value === teme.stud_pitanja"
+              v-model="grana2"
+              :input="{ tag: 'select', options: studiji }"
+              is-user
+            />
+            <TalqueiMessage v-show="this.answer === teme.zanimljivosti" :text="this.recenicaString" />
           </Talquei>
         </template>
       </v-col>
@@ -36,13 +55,9 @@ export default {
   },
   watch: {
     value: function() {
-      // this.messages.push({
-      //   imeKorisnika: this.imeKorisnika,
-      //   text: this.value
-      // }),
+      //slanje prvotne opcije na bazu - hot topics?s
       this.answer = this.value;
       console.log("Sending " + this.value + " to firebase.");
-      debugger;
       db.collection("usermessages").add({
         imeKorisnika: this.imeKorisnika,
         message: this.value
@@ -50,6 +65,9 @@ export default {
     }
   },
   mounted() {
+    //randomizer za opciju zanimljivosti
+    this.recenicaIndex = Math.floor(Math.random() * this.arrayrec.length);
+    this.recenicaString = this.arrayrec[this.recenicaIndex];
     let self = this;
     setTimeout(function() {
       if (self.imeKorisnika != "") {
@@ -87,21 +105,5 @@ export default {
 
 <style lang="scss" scoped>
 @import "../styles/style.css";
-.container {
-  max-height: calc(100vh - 64px) !important;
-  overflow-y: auto;
-}
-.list-item {
-  margin-right: 10px;
-}
-.list-enter-active,
-.list-leave-active {
-  transition: all 1s;
-}
-.list-enter,
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
-}
 </style>
 
