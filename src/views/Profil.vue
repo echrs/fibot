@@ -34,11 +34,12 @@
               :rules="passwordRules"
               type="password"
               id="exampleInputPassword2"
-              label="Ponovno upišite novu lozinku"
+              label="Ponovno upiši novu lozinku"
               required
             ></v-text-field>
             <v-alert v-if="newPassword != newPasswordConf" type="error">Lozinke se ne podudaraju.</v-alert>
             <v-btn
+              v-show="!errornotif && !successful"
               v-if="newPassword === newPasswordConf"
               depressed
               color="#a0e1f6"
@@ -46,6 +47,15 @@
               class="mt-12"
               @click="update"
             >Spremi</v-btn>
+            <v-btn
+              v-if="successful"
+              depressed
+              color="success"
+              dark
+              class="mt-12"
+              @click="reset"
+            >Lozinka promijenjena</v-btn>
+            <v-btn v-if="errornotif" depressed color="red" dark class="mt-12" @click="reset">Error</v-btn>
           </v-form>
         </v-sheet>
       </v-col>
@@ -62,7 +72,8 @@ export default {
       password: "",
       newPassword: "",
       newPasswordConf: "",
-      successful: "",
+      errornotif: false,
+      successful: false,
       passwordRules: [
         v => !!v || "Potrebno je unijeti lozinku",
         v => (v && v.length >= 8) || "Lozinka mora imati više od 8 znakova"
@@ -71,15 +82,25 @@ export default {
   },
   methods: {
     update() {
+      let self = this;
       var user = firebase.auth().currentUser;
       user
         .updatePassword(this.newPassword)
         .then(function() {
           console.log("Uspješno mijenjanje lozinke!");
+          self.successful = true;
         })
         .catch(function(error) {
-          // An error happened.
+          self.errornotif = true;
         });
+    },
+    reset() {
+      this.email = "";
+      this.password = "";
+      this.newPassword = "";
+      this.newPasswordConf = "";
+      this.errornotif = false;
+      this.successful = false;
     }
   }
 };

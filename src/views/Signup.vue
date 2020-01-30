@@ -89,7 +89,6 @@ export default {
         })
         .catch(error => {
           console.error(error);
-          this.errorMessage = error.message;
         });
     }
   }
