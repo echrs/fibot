@@ -6,6 +6,12 @@ export default {
     initialMessage: "",
     messages: [],
     disableInput: false,
+    teme: {
+        upisi: 'Upisi',
+        stud_programi: 'Studijski programi',
+        stud_pitanja: 'Studentska pitanja',
+        opcenito: 'Općenito o faksu'
+    },
     razgovor: {
         Pocetak: {
             show: false,

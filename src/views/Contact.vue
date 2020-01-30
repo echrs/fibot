@@ -17,7 +17,7 @@
             row-height="50"
             outlined
             auto-grow
-            label="Fibot mi je rekao..."
+            label="Fi mi je rekao..."
           ></v-textarea>
           <v-btn depressed color="#a0e1f6" dark @click="send">Pošalji</v-btn>
         </v-sheet>
