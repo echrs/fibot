@@ -21,7 +21,8 @@
               label="Lozinka"
               required
             ></v-text-field>
-            <v-btn depressed color="#a0e1f6" dark class="mt-12" @click="login">Nastavi</v-btn>
+            <v-btn v-show="!errornotif" depressed color="#a0e1f6" dark class="mt-12" @click="login">Nastavi</v-btn>
+            <v-btn v-show="errornotif" depressed color="red" dark class="mt-12" @click="reset">Error</v-btn>
           </v-form>
         </v-sheet>
       </v-col>
@@ -37,17 +38,25 @@ export default {
       email: "",
       emailRules: [v => !!v || "Potrebno je unijeti e-mail"],
       password: "", 
-      passwordRules: [v => !!v || "Potrebno je unijeti lozinku"]
+      passwordRules: [v => !!v || "Potrebno je unijeti lozinku"],
+      errornotif: false
     };
   },
   methods: {
     login() {
+      let self = this;
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .catch(function(error) {
           console.log(error);
+          self.errornotif=true;
         });
+    },
+    reset(){
+      this.email="";
+      this.password="";
+      this.errornotif=false;
     }
   }
 };

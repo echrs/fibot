@@ -2,7 +2,7 @@
   <v-app id="fibot">
     <div>
       <v-app-bar color="#A0E0F6" flat>
-        <v-btn icon>
+        <v-btn @click="pageReload" icon>
           <router-link to="/">
             <v-icon color="white">home</v-icon>
           </router-link>
@@ -41,7 +41,7 @@
               </router-link>
             </v-list-item-title>
             <v-list-item-title>
-              <v-btn class="pr-12" @click="logout" text small>Odjava</v-btn>
+              <v-btn class="pr-12" @click="logout();pageReload()" text small>Odjava</v-btn>
             </v-list-item-title>
           </v-list>
         </v-menu>
@@ -49,11 +49,6 @@
         <v-btn icon>
           <router-link to="/contact">
             <v-icon color="white">mail</v-icon>
-          </router-link>
-        </v-btn>
-        <v-btn icon>
-          <router-link to="/">
-            <v-icon color="white">share</v-icon>
           </router-link>
         </v-btn>
 
@@ -83,6 +78,9 @@ export default {
   methods: {
     logout() {
       firebase.auth().signOut();
+    },
+    pageReload() {
+      window.location.reload();
     }
   },
   mounted() {
@@ -99,7 +97,7 @@ export default {
             if (doc.exists) {
               this.imeKorisnika = doc.data().imeKorisnika;
             } else {
-              console.log("No such document!");
+              console.log("Nema tog korisnika!");
             }
           });
         if (this.$route.name !== "home") {

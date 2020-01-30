@@ -27,7 +27,7 @@
               v-model="passwordConfirmation"
               :rules="passwordRules"
               type="password"
-              label="Ponovno upišite lozinku"
+              label="Ponovno upiši lozinku"
               required
             ></v-text-field>
             <v-alert v-if="password != passwordConfirmation" type="error">Lozinke se ne podudaraju.</v-alert>
@@ -75,18 +75,16 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(() => {
-          // postavi podatke o korisniku
           let id = this.email;
-          // sada moramo spremiti te dodatne podatke
           db.collection("users")
             .doc(id)
             .set({
               imeKorisnika: this.imeKorisnika
             });
           then(function() {
-            console.log("Document successfully written!");
+            console.log("Uspješno kreiran korisnik!");
           }).catch(function(error) {
-            console.error("Error writing document: ", error);
+            console.error("Error: ", error);
           });
         })
         .catch(error => {

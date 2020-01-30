@@ -1,10 +1,7 @@
 export default {
     imeKorisnika: '',
     authenticated: false,
-    userEmail: 'test@test.com',
-    newMessage: "",
-    //messages: [],
-    //disableInput: false,
+    userEmail: '',
     initialMessage: '',
     value: '',
     answer:'',
@@ -12,7 +9,8 @@ export default {
         upisi: 'Upisi',
         stud_programi: 'Studijski programi',
         stud_pitanja: 'Studentska pitanja',
-        zanimljivosti: 'Zanimljivosti'
+        zanimljivosti: 'Zanimljivosti',
+        imam_pitanje: 'Imam pitanje!'
     },
     grana1: '',
     studiji: {
@@ -22,6 +20,9 @@ export default {
     },
     grana2: '',
     studpitanja: {
+        menza: 'Menza',
+        referada: 'Referada',
+        smjestaj: 'Smještaj'
 
     },
     arrayrec: [
@@ -29,8 +30,11 @@ export default {
         'Udruga SPIN nudi besplatno korištenje resursa fakulteta i stručno mentorstvo u projektima svih područja ICT-a.', 
         'Na fakultetu koriste se napredne tehnologije kao što su Tensorflow, Flask, Django, SQLAlchemy, Postgres, Vue.js...',
         'Možeš sudjelovati na uzbudljivim natjecanjima kao što su ACM ICPC, STEM Games, Global Game Jam.',
-        '',
+        'Znaš li da fakultet ima kolegij Stručna praksa gdje studenti imaju na izbor više od 20 poslodavaca? Sada znaš!',
     ],
     recenicaIndex:'',
     recenicaString:'',
+    pitanje: '',
+    posaljiodg: false,
+    showbtn: false,
 }

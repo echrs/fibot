@@ -19,10 +19,14 @@
           </v-card-title>
           <v-card-text v-if="!authenticated" class="pt-0 justify-center">
             <router-link to="/login">
-              <v-btn class="mr-3" outlined color="#6ADCEC" dark>Prijava</v-btn>
+              <transition name="fade">
+                <v-btn v-if="showbtn" class="mr-3" outlined color="#6ADCEC" dark>Prijava</v-btn>
+              </transition>
             </router-link>
             <router-link to="/signup">
-              <v-btn color="#6ADCEC" depressed dark>Registracija</v-btn>
+              <transition name="fade">
+                <v-btn v-if="showbtn" color="#6ADCEC" depressed dark>Registracija</v-btn>
+              </transition>
             </router-link>
           </v-card-text>
         </v-card>
@@ -42,6 +46,12 @@ export default {
   },
   components: {
     VueTyper
+  },
+  mounted() {
+    let self = this;
+    setTimeout(function() {
+      self.showbtn = true;
+    }, 4000);
   }
 };
 </script>
@@ -58,7 +68,12 @@ export default {
 .custom.caret {
   display: none;
 }
-.v-btn{
- transition: opacity .1s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
