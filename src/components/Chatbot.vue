@@ -1,92 +1,109 @@
 <template>
-  <v-container class="container scroll-y" fill-height style="background:#EFFAFE" align-end>
-    <v-row style="background:#EFFAFE; max-height 400px; overflow-y: auto;">
-      <v-col id="msgs" style="visibility:visible;">
-        <transition :duration="2000" name="list">
-          <div class="pb-1" v-if="imeKorisnika">
-            <v-chip>Zdravo {{imeKorisnika}}! O čemu želiš razgovarati?</v-chip>
-            <div class="pb-1" v-for="(message, name) in razgovor" :key="name">
-              <div class="pb-1">
-                <v-btn @click="sendMessage(name)">{{name}}</v-btn>
-              </div>
-              </div>
-            </div>
-          </div>
-        </transition>
-        <transition-group name="list">
-          <div class="pb-1" v-for="(message,key) in messages" :key="key">
-            <v-chip v-bind:id="message.text" :imeKorisnika="message.imeKorisnika">{{message.text}}</v-chip>
-          </div>
-        </transition-group>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-text-field
-          label="Reci mi!"
-          rounded
-          outlined
-          :disabled="disableInput"
-          v-model="newMessage"
-          v-on:keyup.enter="sendMessage()"
-        ></v-text-field>
+  <v-container
+    class="container scroll-y"
+    fill-height
+    justify-center
+    style="background:#EFFAFE"
+    align-end
+  >
+    <v-row style="background:#EFFAFE; overflow-y: auto;">
+      <v-col id="msgs">
+        <template>
+          <Talquei>
+            <TalqueiMessage :imeKorisnika="imeKorisnika" :text="initialMessage" />
+            <TalqueiMessage v-model="value" :input="{ tag: 'select', options: teme }" is-user />
+            <TalqueiMessage
+              v-show="this.value === teme.upisi"
+              text="Trenutno nema upisa u tijeku! Upisi za Fakultet informatike u Puli odvijaju se krajem srpnja i rujna. "
+            />
+            <TalqueiMessage
+              v-show="this.value === teme.stud_programi"
+              text="FIPU nudi preddiplomske i diplomske studije. Koji te zanimaju?"
+            />
+            <TalqueiMessage
+              v-if="this.value === teme.stud_programi"
+              v-model="grana1"
+              :input="{ tag: 'select', options: studiji }"
+              is-user
+            />
+            <TalqueiMessage
+              v-show="this.value === teme.stud_pitanja"
+              text="Ah! Pitanja - svi ih imamo... Reci mi!"
+            />
+            <TalqueiMessage
+              v-if="this.value === teme.stud_pitanja"
+              v-model="grana2"
+              :input="{ tag: 'select', options: studiji }"
+              is-user
+            />
+            <TalqueiMessage v-show="this.answer === teme.zanimljivosti" :text="this.recenicaString" />
+          </Talquei>
+        </template>
       </v-col>
     </v-row>
   </v-container>
 </template>
-
 <script>
 import store from "@/store.js";
+import { Talquei, TalqueiMessage } from "talquei";
+
 export default {
   name: "Chatbot",
-  components: {},
+  components: { Talquei, TalqueiMessage },
   data() {
     return store;
   },
-  mounted() {},
-  methods: {
-    sendMessage(value) {
-      this.newMessage = value;
-      console.log("sending " + this.newMessage);
-      this.messages.push({
+  watch: {
+    value: function() {
+      //slanje prvotne opcije na bazu - hot topics?s
+      this.answer = this.value;
+      console.log("Sending " + this.value + " to firebase.");
+      db.collection("usermessages").add({
         imeKorisnika: this.imeKorisnika,
-        text: this.newMessage
-      }),
-        db.collection("usermessages").add({
-          imeKorisnika: this.imeKorisnika,
-          newMessage: this.newMessage
-        });
-      this.newMessage = "";
-
-      //this.receiveResponse();
-    },
-    receiveResponse() {
-      //this.disableInput = true,
-      this.messages.push({
-        imeKorisnika: "bot",
-        text: "A reply!"
+        message: this.value
       });
-      //this.disableInput = false
     }
+  },
+  mounted() {
+    //randomizer za opciju zanimljivosti
+    this.recenicaIndex = Math.floor(Math.random() * this.arrayrec.length);
+    this.recenicaString = this.arrayrec[this.recenicaIndex];
+    let self = this;
+    setTimeout(function() {
+      if (self.imeKorisnika != "") {
+        self.initialMessage =
+          "Zdravo " + self.imeKorisnika + "! O čemu želiš razgovarati?";
+      } else {
+        self.initialMessage = "Zdravo! O čemu želiš razgovarati?";
+      }
+    }, 1000);
+  },
+  methods: {
+    // sendMessage() {
+    //   console.log("sending " + this.value);
+    //      this.messages.push({
+    //        imeKorisnika: this.imeKorisnika,
+    //        text: this.value
+    //      }),
+    //   db.collection("usermessages").add({
+    //     imeKorisnika: this.imeKorisnika,
+    //     message: this.value
+    //   });
+    //     this.receiveResponse();
+    // },
+    // receiveResponse() {
+    //     this.disableInput = true,
+    //   this.messages.push({
+    //     imeKorisnika: "bot",
+    //     text: "A reply!"
+    //   });
+    //     this.disableInput = false
+    // }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.container {
-  max-height: calc(100vh - 64px) !important;
-  overflow-y: auto;
-}
-.list-item {
-  margin-right: 10px;
-}
-.list-enter-active,
-.list-leave-active {
-  transition: all 1s;
-}
-.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateY(30px);
-}
+@import "../styles/style.css";
 </style>
 
