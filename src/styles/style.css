@@ -1,0 +1,163 @@
+/* prilagođeno,
+source: https://github.com/luciorubeens/talquei */
+
+.talquei {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #A0E0F6;
+  min-width: 350px;
+}
+
+.talquei-terminal {
+  flex: 1 1 0%;
+  overflow-y: auto;
+  padding: 1rem 0.8rem;
+}
+
+.talquei-message {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.talquei-message__text__pending {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.talquei-message--app {
+  align-items: flex-start;
+  flex-direction: row;
+  padding-right: 2rem;
+  margin-left: 0rem !important;
+
+}
+.talquei-message--app .talquei-message__text {
+  background-color: #A0E0F6;
+  color: #ffffff;
+  border-top-left-radius: 0px;
+  margin-top: .5rem;
+}
+
+.talquei-message--user {
+  align-items: flex-end;
+  flex-direction: row-reverse;
+  padding-left: 2rem;
+}
+
+.talquei-message--user .talquei-message__text {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-bottom-right-radius: 0px;
+}
+
+.talquei-message__text {
+  line-height: 1.5rem;
+  display: inline-block;
+  font-family: Roboto;
+  letter-spacing: .04rem;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  background-color: #f1f5f8;
+  padding: .7rem 1rem;
+  font-weight: 400;
+  overflow-wrap: break-word;
+}
+
+.talquei-inputbar {
+  position: relative;
+  padding: .8rem 1rem;
+  background-color: inherit;
+  border-radius: 20px;
+  background-color: #ffffff;
+  border-color: #a0e1f6;
+  border: 1px solid;
+}
+
+.talquei-form {
+  display: flex;
+  align-items: center;
+}
+
+.talquei-form__text {
+  flex: 1 1 0%;
+  font-size: 1rem;
+  border: none;
+  padding-right: 3rem;
+  font-weight: 400;
+  background-color: transparent;
+  outline: none;
+}
+
+.talquei-form__submit {
+  transition: background .1s;
+  cursor: pointer;
+  background-color: #A0E0F6;
+  color: #ffffff;
+  font-size: inherit;
+  border-radius: 100px;
+  user-select: none;
+  border: 0;
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+}
+
+.talquei-form__submit:hover {
+  background-color: #A0E0F6;
+}
+
+.talquei-form__select {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  color: #6ADCEC;
+}
+
+.talquei-form__select__item {
+  /* cursor: pointer; */
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  margin-right: 10px !important;
+  letter-spacing: .0892857143rem;
+  border-radius: 5px;
+  display: inline-block;
+  margin-right: 0.3rem;
+  border: 1px solid #A0E0F6;
+}
+
+.talquei-form__select__item:hover {
+  outline: none;
+  border-color: #A0E0F6;
+  background-color: #A0E0F6;
+  color: #ffffff;
+}
+
+.talquei--fade-enter-active, .talquei--fade-leave-active {
+  transition: opacity .1s;
+}
+.talquei--fade-enter, .talquei--fade-leave-to {
+  opacity: 0;
+}
+.talquei-message__avatar {
+  visibility: hidden;
+  position: fixed; 
+}
+.talquei--blink {
+  animation: talquei-blinker 1s linear infinite;
+}
+
+
+@keyframes talquei-blinker {
+  50% {
+    opacity: 0;
+  }
+}
