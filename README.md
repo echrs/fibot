@@ -5,6 +5,7 @@ Tim: Nikki Bernobić
 Korištene tehnologije: Vue + Vuetify framework, Firebase  
 Ostalo: vue-typer, Talquei
 
+[Demo!](https://fibot.now.sh/)
 ## Project setup
 ```
 yarn install
