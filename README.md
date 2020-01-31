@@ -1,5 +1,5 @@
 # fibot
-Web aplikacija je namijenjena studentima Fakulteta Informatike u Puli. Kao što ime možda sugerira, Fibot će pomagati potencijalnim i sadašnjim studentima pružanjem raznih informacija. Njome se želi pružiti studentima jednostavan, zabavan i pregledan način informiranja te smanjiti količinu e-mailova koju primaju djelatnici fakulteta.
+Web aplikacija je namijenjena studentima Fakulteta informatike u Puli. Kao što ime možda sugerira, Fibot će pomagati potencijalnim i sadašnjim studentima pružanjem raznih informacija. Njome se želi pružiti studentima jednostavan, zabavan i pregledan način informiranja te smanjiti količinu e-mailova koju primaju djelatnici fakulteta.
 
 Tim: Nikki Bernobić  
 Korištene tehnologije: Vue + Vuetify framework, Firebase  
